@@ -14,11 +14,12 @@ const getNationalNumber = data => {
 	return result
 }
 
-fetch('https://pokeapi.co/api/v2/pokemon/ditto')
+
+fetch('https://pokeapi.co/api/v2/pokemon/bibarel')
 	.then(res => res.json())
 	.then(data => {
 		const dataAbilities = data.abilities.map(ability => ability.ability.name);
 		const nationalNumber = getNationalNumber(data);
-
+		const types = data.types.map(type => type.type.name);
 	}
 );
