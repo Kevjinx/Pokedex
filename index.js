@@ -31,7 +31,9 @@ const getStats = data => {
 
 const getData = async () => {
 	try {
-		const response = await fetch('https://pokeapi.co/api/v2/pokemon/bibarel')
+		const searchValue = document.getElementById('pokemon-search-input').value;
+		console.log(searchValue);
+		const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchValue}`)
 		const data = await response.json()
 		const dataAbilities = data.abilities.map(ability => ability.ability.name);
 		const nationalNumber = getNationalNumber(data);
@@ -58,7 +60,7 @@ const sendData = async (event) => {
 	const baseExp = document.getElementById("base-exp-data")
 	const hp = document.getElementById("hp-data")
 	const attack = document.getElementById("attack-data")
-	const defense = document.getElementByI("defense-data")
+	const defense = document.getElementById("defense-data")
 	const spAttack = document.getElementById("sp-attack-data")
 	const spDefense = document.getElementById("sp-defense-data")
 	const speed = document.getElementById("speed-data")
@@ -78,8 +80,14 @@ const sendData = async (event) => {
 	spAttack.innerText = data.stats.spAttack
 	spDefense.innerText = data.stats.spDefense
 	speed.innerText = data.stats.speed
-
 }
 
+const searchInput = document.getElementById('pokemon-search-input');
 const searchBtn = document.getElementById('search-btn');
 searchBtn.addEventListener('click', sendData);
+searchInput.addEventListener('keypress', (event) => {
+	if (event.key === 'Enter') {
+		event.preventDefault()
+		searchBtn.click()
+	}
+})
