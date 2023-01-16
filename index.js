@@ -40,7 +40,8 @@ const getData = async () => {
 		const weight = data.weight;
 		const stats = getStats(data);
 		const baseExp = data.base_experience;
-		const result = {dataAbilities, nationalNumber, types, height, weight, stats, baseExp}
+		const img = data.sprites.other['official-artwork'].front_default;
+		const result = {img, dataAbilities, nationalNumber, types, height, weight, stats, baseExp}
 		return result
 	} catch (error) {
 		console.log(error)
@@ -62,6 +63,7 @@ const sendData = async (event) => {
 	const spAttack = document.getElementById("sp-attack-data")
 	const spDefense = document.getElementById("sp-defense-data")
 	const speed = document.getElementById("speed-data")
+	const img = document.getElementById('image')
 
 	const data = await getData();
 	console.log(data);
@@ -78,6 +80,7 @@ const sendData = async (event) => {
 	spAttack.innerText = data.stats.spAttack
 	spDefense.innerText = data.stats.spDefense
 	speed.innerText = data.stats.speed
+	img.src = data.img
 }
 
 const searchInput = document.getElementById('pokemon-search-input');
