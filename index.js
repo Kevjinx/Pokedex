@@ -58,7 +58,7 @@ const sendData = async (event) => {
 	const baseExp = document.getElementById("base-exp-data")
 	const hp = document.getElementById("hp-data")
 	const attack = document.getElementById("attack-data")
-	const defense = document.getElementById("defense-data")
+	const defense = document.getElementByI("defense-data")
 	const spAttack = document.getElementById("sp-attack-data")
 	const spDefense = document.getElementById("sp-defense-data")
 	const speed = document.getElementById("speed-data")
