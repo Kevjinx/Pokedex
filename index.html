@@ -32,11 +32,13 @@
 				</div>
 			</div>
 		</nav>
-		<div class="input-group input-group-sm mb-3">
-			<input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-			<button type="button" class="btn btn-primary">Search</button>
-
-		</div>
+		<form>
+			<div class="form-group">
+				<label for="exampleInputEmail1">Search for Pokemon</label>
+				<input type="email" class="form-control" id="pokemon-search-input" placeholder="Enter Pokemon Name">
+			</div>
+			<button type="button" id="search-btn" class="btn btn-primary">Submit</button>
+		</form>
 		<div class="pokedex-container-wrapper">
 			<div class="pokedex-container">
 				<div class="row">
@@ -48,124 +50,124 @@
 						<table>
 							<tbody>
 								<tr>
-									<th class="national-number-header">National Number</th>
-									<td class="national-number-data">908</td>
+									<th id="national-number-header">National Number</th>
+									<td id="national-number-data">908</td>
 								</tr>
 								<tr>
-									<th class="type-header">Type</th>
-									<td class="type-data">Grass, Dark</td>
+									<th id="type-header">Type</th>
+									<td id="type-data">Grass, Dark</td>
 								</tr>
 								<tr>
-									<th class="species-header">Species</th>
-									<td class="species-data">Magician Pokemon</td>
+									<th id="species-header">Species</th>
+									<td id="species-data">Magician Pokemon</td>
 								</tr>
 								<tr>
-									<th class="height-header">Height</th>
-									<td class="height-data">1.5 m</td>
+									<th id="height-header">Height</th>
+									<td id="height-data">1.5 m</td>
 								</tr>
 								<tr>
-									<th class="weight-header">Weight</th>
-									<td class="weight-data">31.2 kg</td>
+									<th id="weight-header">Weight</th>
+									<td id="weight-data">31.2 kg</td>
 								</tr>
 								<tr>
-									<th class="abilities-header">Abilities</th>
-									<td class="abilities-data">Overgrow</td>
+									<th id="abilities-header">Abilities</th>
+									<td id="abilities-data">Overgrow</td>
 								</tr>
 							</tbody>
 						</table>
-					</div>
-					<div class="training-container col-4">
+						</div>
+						<div id="training-container col-4">
 						<h3>Training</h3>
 						<table>
 							<tbody>
 								<tr>
-									<th class="ev-yield-header">EV yield	</th>
-									<td class="ev-yield-data">2 Speed</td>
+									<th id="ev-yield-header">EV yield	</th>
+									<td id="ev-yield-data">2 Speed</td>
 								</tr>
 								<tr>
-									<th class="catch-rate-header">Catch rate</th>
-									<td class="catch-rate-data">Grass, Dark</td>
+									<th id="catch-rate-header">Catch rate</th>
+									<td id="catch-rate-data">Grass, Dark</td>
 								</tr>
 								<tr>
-									<th class="base-friendship-header">Base Friendship</th>
-									<td class="base-friendship-data">Magician Pokemon</td>
+									<th id="base-friendship-header">Base Friendship</th>
+									<td id="base-friendship-data">Magician Pokemon</td>
 								</tr>
 								<tr>
-									<th class="base-exp-header">Base Exp.</th>
-									<td class="base-exp-data">1.5 m</td>
+									<th id="base-exp-header">Base Exp.</th>
+									<td id="base-exp-data">1.5 m</td>
 								</tr>
 								<tr>
-									<th class="growth-header">Growth Rate	</th>
-									<td class="growth-data">Medium Slow</td>
+									<th id="growth-header">Growth Rate	</th>
+									<td id="growth-data">Medium Slow</td>
 								</tr>
 							</tbody>
 						</table>
-					</div>
-					<div class="breeding-container col-4">
+						</div>
+						<div id="breeding-container col-4">
 						<h3>Breeding</h3>
 						<table>
 							<tbody>
 								<tr>
-									<th class="egg-groups-header">Egg Groups</th>
-									<td class="egg-groups-data">Field, Grass</td>
+									<th id="egg-groups-header">Egg Groups</th>
+									<td id="egg-groups-data">Field, Grass</td>
 								</tr>
 								<tr>
-									<th class="gender-header">Gender</th>
-									<td class="catch-rate-data">87.5% male, 12.5% female</td>
+									<th id="gender-header">Gender</th>
+									<td id="catch-rate-data">87.5% male, 12.5% female</td>
 								</tr>
 								<tr>
-									<th class="egg-cycles-header">Egg Cycles</th>
-									<td class="egg-cycles-data">20</td>
+									<th id="egg-cycles-header">Egg Cycles</th>
+									<td id="egg-cycles-data">20</td>
 								</tr>
 							</tbody>
 						</table>
 
-					</div>
-				</div>
-				<div class="base-stats-container">
-					<h3>Base Stats</h3>
-					<table>
+						</div>
+						</div>
+						<div id="base-stats-container">
+						<h3>Base Stats</h3>
+						<table>
 						<tbody>
 							<tr>
-								<th class="hp-header">HP</th>
-								<td class="hp-data">61</td>
-								<td class="progress">
-									<div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+								<th id="hp-header">HP</th>
+								<td id="hp-data">61</td>
+								<td id="progress">
+									<div id="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
 								</td>
 							</tr>
 							<tr>
-								<th class="attack-header">Attack</th>
-								<td class="attack-data">80</td>
-								<td class="progress">
-									<div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+								<th id="attack-header">Attack</th>
+								<td id="attack-data">80</td>
+								<td id="progress">
+									<div id="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
 								</td>
 							</tr>
 							<tr>
-								<th class="defense-header">Defense</th>
-								<td class="defense-data">63</td>
-								<td class="progress">
-									<div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+								<th id="defense-header">Defense</th>
+								<td id="defense-data">63</td>
+								<td id="progress">
+									<div id="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
 								</td>
 							</tr>
 							<tr>
-								<th class="sp-attack-header">Sp. Atk</th>
-								<td class="sp-attack-data">60</td>
-								<td class="progress">
-									<div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+								<th id="sp-attack-header">Sp. Atk</th>
+								<td id="sp-attack-data">60</td>
+								<td id="progress">
+									<div id="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
 								</td>
 							</tr>
 							<tr>
-								<th class="sp-defense-header">Sp. Def</th>
-								<td class="sp-defense-data">63</td>
-								<td class="progress">
-									<div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+								<th id="sp-defense-header">Sp. Def</th>
+								<td id="sp-defense-data">63</td>
+								<td id="progress">
+									<div id="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
 								</td>
 							</tr>
 							<tr>
-								<th class="speed-header">Speed</th>
-								<td class="speed-data">83</td>
-								<td class="progress">
-									<div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+								<th id="speed-header">Speed</th>
+								<td id="speed-data">83</td>
+								<td id="progress">
+									<div id="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
 								</td>
 							</tr>
 						</tbody>
@@ -176,7 +178,7 @@
 
 
 
-
+		<script type='module' src="./index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
   </body>
 </html>
