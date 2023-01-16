@@ -1,5 +1,3 @@
-
-
 const getNationalNumber = data => {
 	for (let i = 0; i < data.game_indices.length; i++) {
 		//using newer version to include all pokemon
@@ -69,10 +67,10 @@ const sendData = async (event) => {
 	console.log(data);
 
 	nationalNumber.innerText = data.nationalNumber
-	type.innerText = data.types[0]
+	type.innerText = data.types.toString()
 	height.innerText = data.height
 	weight.innerText = data.weight
-	abilities.innerText = data.dataAbilities[0]
+	abilities.innerText = data.dataAbilities.toString()
 	baseExp.innerText = data.stats.baseExp
 	hp.innerText = data.stats.hp
 	attack.innerText = data.stats.attack
