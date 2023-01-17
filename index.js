@@ -7,6 +7,7 @@ const getNationalNumber = data => {
 	}
 }
 
+//should refactor this
 const getStats = data => {
 	let result = {}
 	data.stats.map(stat => {
@@ -41,12 +42,22 @@ const updateStats = (stats) => {
 }
 
 
-const getData = async () => {
+const getData = async (ranBtn) => {
 	try {
-		const searchValue = document.getElementById('pokemon-search-input').value;
-		console.log(searchValue);
-		const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchValue}`)
+		console.log(ranBtn);
+		let value;
+		if (ranBtn === true) {
+			//randomly select a pokemon index between 1-1008
+			value = Math.floor(Math.random() * 1008) + 1;
+		} else {
+			value = document.getElementById('pokemon-search-input').value;
+		}
+
+		const url = `https://pokeapi.co/api/v2/pokemon/${value}`
+		console.log(url);
+		const response = await fetch(url)
 		const data = await response.json()
+
 		const dataAbilities = data.abilities.map(ability => ability.ability.name);
 		const nationalNumber = getNationalNumber(data);
 		const types = data.types.map(type => type.type.name);
@@ -56,16 +67,17 @@ const getData = async () => {
 		const baseExp = data.base_experience;
 		const img = data.sprites.other['official-artwork'].front_default;
 		const name = data.forms[0].name;
+
 		const result = {name, img, dataAbilities, nationalNumber, types, height, weight, stats, baseExp}
 		return result
+
 	} catch (error) {
 		console.log(error)
 	}
 }
 
-const sendData = async (event) => {
+const updateData = async (event) => {
 	event.preventDefault();
-	console.log('clicked search button');
 	const type = document.getElementById("type-data")
 	const height = document.getElementById("height-data")
 	const weight = document.getElementById("weight-data")
@@ -79,10 +91,16 @@ const sendData = async (event) => {
 	const img = document.getElementById('image')
 	const pokemonName = document.getElementById('pokemon-name')
 
-	const data = await getData();
+	let data;
+	if (event.target.id === 'random-pokemon-btn') {
+		console.log('clicked random button')
+		data = await getData(true)
+	} else data = await getData();
+
 
 	const pokemonNameUpper = data.name.charAt(0).toUpperCase() + data.name.slice(1)
 
+	//!
 	pokemonName.innerText = `${pokemonNameUpper} #${data.nationalNumber.toString()}`
 	type.innerText = data.types.toString()
 	height.innerText = data.height
@@ -97,12 +115,20 @@ const sendData = async (event) => {
 	img.src = data.img
 
 	updateStats(data.stats)
-
 }
+
+
+
+
+
+
+
+const randomPokemonBtn = document.getElementById('random-pokemon-btn');
+randomPokemonBtn.addEventListener('click', updateData);
 
 const searchInput = document.getElementById('pokemon-search-input');
 const searchBtn = document.getElementById('search-btn');
-searchBtn.addEventListener('click', sendData);
+searchBtn.addEventListener('click', updateData);
 searchInput.addEventListener('keypress', (event) => {
 	if (event.key === 'Enter') {
 		event.preventDefault()
