@@ -38,8 +38,6 @@ const updateStats = (stats) => {
 	defenseBar.style.width = `${stats.defense}%`
 	spAttackBar.style.width = `${stats.spAttack}%`
 	spDefenseBar.style.width = `${stats.spDefense}%`
-	console.log(stats)
-	console.log(hpBar.style.width)
 }
 
 
@@ -68,7 +66,6 @@ const getData = async () => {
 const sendData = async (event) => {
 	event.preventDefault();
 	console.log('clicked search button');
-	const nationalNumber = document.getElementById('national-number-data')
 	const type = document.getElementById("type-data")
 	const height = document.getElementById("height-data")
 	const weight = document.getElementById("weight-data")
@@ -81,11 +78,12 @@ const sendData = async (event) => {
 	const speed = document.getElementById("speed-data")
 	const img = document.getElementById('image')
 	const pokemonName = document.getElementById('pokemon-name')
-	const data = await getData();
-	console.log(data);
 
-	pokemonName.innerText = data.name
-	nationalNumber.innerText = data.nationalNumber
+	const data = await getData();
+
+	const pokemonNameUpper = data.name.charAt(0).toUpperCase() + data.name.slice(1)
+
+	pokemonName.innerText = `${pokemonNameUpper} #${data.nationalNumber.toString()}`
 	type.innerText = data.types.toString()
 	height.innerText = data.height
 	weight.innerText = data.weight
