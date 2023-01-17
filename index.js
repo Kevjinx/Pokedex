@@ -1,7 +1,7 @@
 const getNationalNumber = data => {
 	for (let i = 0; i < data.game_indices.length; i++) {
 		//using newer version to include all pokemon
-		if (data.game_indices[i].version.name === 'black-2') {
+		if (data.game_indices[i].version.name === 'white') {
 			return data.game_indices[i].game_index
 		}
 	}
@@ -135,3 +135,8 @@ searchInput.addEventListener('keypress', (event) => {
 		searchBtn.click()
 	}
 })
+
+window.onload = event => {
+	console.log(event)
+	randomPokemonBtn.click()
+}
