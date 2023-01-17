@@ -27,6 +27,22 @@ const getStats = data => {
 	return result
 }
 
+const updateStats = (stats) => {
+	const hpBar = document.getElementById('hp-bar')
+	const attackBar = document.getElementById('attack-bar')
+	const defenseBar = document.getElementById('defense-bar')
+	const spAttackBar = document.getElementById('sp-attack-bar')
+	const spDefenseBar = document.getElementById('sp-defense-bar')
+	hpBar.style.width = `${stats.hp}%`
+	attackBar.style.width = `${stats.attack}%`
+	defenseBar.style.width = `${stats.defense}%`
+	spAttackBar.style.width = `${stats.spAttack}%`
+	spDefenseBar.style.width = `${stats.spDefense}%`
+	console.log(stats)
+	console.log(hpBar.style.width)
+}
+
+
 const getData = async () => {
 	try {
 		const searchValue = document.getElementById('pokemon-search-input').value;
@@ -41,7 +57,8 @@ const getData = async () => {
 		const stats = getStats(data);
 		const baseExp = data.base_experience;
 		const img = data.sprites.other['official-artwork'].front_default;
-		const result = {img, dataAbilities, nationalNumber, types, height, weight, stats, baseExp}
+		const name = data.forms[0].name;
+		const result = {name, img, dataAbilities, nationalNumber, types, height, weight, stats, baseExp}
 		return result
 	} catch (error) {
 		console.log(error)
@@ -56,7 +73,6 @@ const sendData = async (event) => {
 	const height = document.getElementById("height-data")
 	const weight = document.getElementById("weight-data")
 	const abilities = document.getElementById("abilities-data")
-	const baseExp = document.getElementById("base-exp-data")
 	const hp = document.getElementById("hp-data")
 	const attack = document.getElementById("attack-data")
 	const defense = document.getElementById("defense-data")
@@ -64,16 +80,16 @@ const sendData = async (event) => {
 	const spDefense = document.getElementById("sp-defense-data")
 	const speed = document.getElementById("speed-data")
 	const img = document.getElementById('image')
-
+	const pokemonName = document.getElementById('pokemon-name')
 	const data = await getData();
 	console.log(data);
 
+	pokemonName.innerText = data.name
 	nationalNumber.innerText = data.nationalNumber
 	type.innerText = data.types.toString()
 	height.innerText = data.height
 	weight.innerText = data.weight
 	abilities.innerText = data.dataAbilities.toString()
-	baseExp.innerText = data.stats.baseExp
 	hp.innerText = data.stats.hp
 	attack.innerText = data.stats.attack
 	defense.innerText = data.stats.defense
@@ -81,6 +97,9 @@ const sendData = async (event) => {
 	spDefense.innerText = data.stats.spDefense
 	speed.innerText = data.stats.speed
 	img.src = data.img
+
+	updateStats(data.stats)
+
 }
 
 const searchInput = document.getElementById('pokemon-search-input');
