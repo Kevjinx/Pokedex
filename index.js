@@ -48,6 +48,28 @@ const updateNextPrevBtn = (data) => {
 	const prevBtn = document.getElementById('previous-pokemon-btn')
 	nextBtn.value = data.nationalNumber + 1
 	prevBtn.value = data.nationalNumber - 1
+
+}
+
+const fetchData = async (value) => {
+	const url = `https://pokeapi.co/api/v2/pokemon/${value}`
+	console.log('fetching data from url: ', url);
+	const response = await fetch(url)
+	const data = await response.json()
+
+	let result = {}
+	result.id = data.id
+	result.dataAbilities = data.abilities.map(ability => ability.ability.name);
+	result.nationalNumber = getNationalNumber(data);
+	result.types = data.types.map(type => type.type.name);
+	result.height = data.height;
+	result.weight = data.weight;
+	result.stats = getStats(data);
+	result.baseExp = data.base_experience;
+	result.img = data.sprites.other['official-artwork'].front_default;
+	result.name = data.forms[0].name;
+
+	return result
 }
 
 
@@ -68,22 +90,7 @@ const getData = async (search) => {
 			value = document.getElementById('pokemon-search-input').value;
 		}
 
-		const url = `https://pokeapi.co/api/v2/pokemon/${value}`
-		console.log('fetching data from url: ', url);
-		const response = await fetch(url)
-		const data = await response.json()
-
-		const dataAbilities = data.abilities.map(ability => ability.ability.name);
-		const nationalNumber = getNationalNumber(data);
-		const types = data.types.map(type => type.type.name);
-		const height = data.height;
-		const weight = data.weight;
-		const stats = getStats(data);
-		const baseExp = data.base_experience;
-		const img = data.sprites.other['official-artwork'].front_default;
-		const name = data.forms[0].name;
-
-		const result = {name, img, dataAbilities, nationalNumber, types, height, weight, stats, baseExp}
+		const result = await fetchData(value)
 		return result
 
 	} catch (error) {
@@ -91,8 +98,7 @@ const getData = async (search) => {
 	}
 }
 
-const updateData = async (event) => {
-	event.preventDefault();
+const updateText = (data) => {
 	const type = document.getElementById("type-data")
 	const height = document.getElementById("height-data")
 	const weight = document.getElementById("weight-data")
@@ -106,6 +112,26 @@ const updateData = async (event) => {
 	const img = document.getElementById('image')
 	const pokemonName = document.getElementById('pokemon-name')
 
+	const pokemonNameUpper = data.name.charAt(0).toUpperCase() + data.name.slice(1)
+
+	pokemonName.innerText = `${pokemonNameUpper} #${data.id}`
+	type.innerText = data.types.toString()
+	height.innerText = data.height
+	weight.innerText = data.weight
+	abilities.innerText = data.dataAbilities.toString()
+	hp.innerText = data.stats.hp
+	attack.innerText = data.stats.attack
+	defense.innerText = data.stats.defense
+	spAttack.innerText = data.stats.spAttack
+	spDefense.innerText = data.stats.spDefense
+	speed.innerText = data.stats.speed
+	img.src = data.img
+
+}
+
+
+const updateData = async (event) => {
+	event.preventDefault();
 	let data;
 
 	if (event.target.id === 'random-pokemon-btn') {
@@ -121,31 +147,20 @@ const updateData = async (event) => {
 
 	console.log(data);
 
-
-
-	const pokemonNameUpper = data.name.charAt(0).toUpperCase() + data.name.slice(1)
-
-	pokemonName.innerText = `${pokemonNameUpper} #${data.nationalNumber.toString()}`
-	type.innerText = data.types.toString()
-	height.innerText = data.height
-	weight.innerText = data.weight
-	abilities.innerText = data.dataAbilities.toString()
-	hp.innerText = data.stats.hp
-	attack.innerText = data.stats.attack
-	defense.innerText = data.stats.defense
-	spAttack.innerText = data.stats.spAttack
-	spDefense.innerText = data.stats.spDefense
-	speed.innerText = data.stats.speed
-	img.src = data.img
-
+	updateText(data)
 	updateStats(data.stats)
 	updateNextPrevBtn(data)
 }
 
 
-
 const randomPokemonBtn = document.getElementById('random-pokemon-btn');
 randomPokemonBtn.addEventListener('click', updateData);
+
+//adding button for next and previous pokemon based on index number
+const nextPokemonBtn = document.getElementById('next-pokemon-btn');
+const previousPokemonBtn = document.getElementById('previous-pokemon-btn');
+nextPokemonBtn.addEventListener('click', updateData);
+previousPokemonBtn.addEventListener('click', updateData);
 
 const searchInput = document.getElementById('pokemon-search-input');
 const searchBtn = document.getElementById('search-btn');
@@ -161,14 +176,3 @@ window.onload = event => {
 	console.log(event)
 	randomPokemonBtn.click()
 }
-
-
-
-
-//adding button for next and previous pokemon based on index number
-const nextPokemonBtn = document.getElementById('next-pokemon-btn');
-const previousPokemonBtn = document.getElementById('previous-pokemon-btn');
-nextPokemonBtn.addEventListener('click', updateData);
-previousPokemonBtn.addEventListener('click', updateData);
-
-const allBtns = document.querySelector('button');
