@@ -1,5 +1,6 @@
 
 
+
 const getNationalNumber = data => {
 	for (let i = 0; i < data.game_indices.length; i++) {
 		//using newer version to include all pokemon
@@ -43,11 +44,17 @@ const updateStats = (stats) => {
 	spDefenseBar.style.width = `${stats.spDefense}%`
 }
 
-const updateNextPrevBtn = (data) => {
+const updateNextPrevBtn = async (data) => {
 	const nextBtn = document.getElementById('next-pokemon-btn')
 	const prevBtn = document.getElementById('previous-pokemon-btn')
+	const nextPrevPokemon = await getPrevNextData(data.nationalNumber)
+	console.log(nextPrevPokemon)
+
 	nextBtn.value = data.nationalNumber + 1
 	prevBtn.value = data.nationalNumber - 1
+
+	nextBtn.innerText = `${nextPrevPokemon.next.name} #${nextPrevPokemon.next.id}`
+	prevBtn.innerText = `${nextPrevPokemon.prev.name} #${nextPrevPokemon.prev.id}`
 
 }
 
@@ -93,6 +100,16 @@ const getData = async (search) => {
 		const result = await fetchData(value)
 		return result
 
+	} catch (error) {
+		console.log(error)
+	}
+}
+
+const getPrevNextData = async (value) => {
+	try {
+		const next = await fetchData(value+1)
+		const prev = await fetchData(value-1)
+		return {next, prev}
 	} catch (error) {
 		console.log(error)
 	}
@@ -156,7 +173,6 @@ const updateData = async (event) => {
 const randomPokemonBtn = document.getElementById('random-pokemon-btn');
 randomPokemonBtn.addEventListener('click', updateData);
 
-//adding button for next and previous pokemon based on index number
 const nextPokemonBtn = document.getElementById('next-pokemon-btn');
 const previousPokemonBtn = document.getElementById('previous-pokemon-btn');
 nextPokemonBtn.addEventListener('click', updateData);
